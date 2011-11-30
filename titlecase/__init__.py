@@ -1,10 +1,8 @@
 #!/usr/bin/env python
 # -*- coding: utf-8 -*-
 """
-Original Perl version by: John Gruber http://daringfireball.net/ 10 May 2008
-Python version by Stuart Colville http://muffinresearch.co.uk
-Modified by Zach Snow http://zachsnow.com
-License: http://www.opensource.org/licenses/mit-license.php
+Functions:
+``titlecase``: Converts input to titlecase.
 """
 
 import re
@@ -34,16 +32,23 @@ def lowercase(text):
     return text.lower()
 
 def titlecase(text, uppercase=uppercase, lowercase=lowercase):
-
     """
-    Titlecases input text
+    Converts input to titlecase.
 
-    This filter changes all words to Title Caps, and attempts to be clever
-    about *un*capitalizing SMALL words like a/an/the in the input.
+    This filter changes all words (save for those that already contain
+    inner capitals or periods) to Title Caps, and attempts to be clever
+    about *un*capitalizing "small" words like a/an/the in the input.
+    Also tries to be clever about leaving all-capitals words (like acronyms)
+    uppercased.
 
-    The list of "SMALL words" which are not capped comes from
+    The list of "small" words which are lowercased comes from
     the New York Times Manual of Style, plus 'vs' and 'v'.
-
+    
+    Keyword arguments:
+    ``uppercase``: the function to use to convert a character to uppercase;
+        defaults to ``str.upper``.
+    ``lowercase``: the function to use to convert a character to lowercase;
+        defaults to ``str.lower``.
     """
     def capitalize(text, uppercase=uppercase):
         """
